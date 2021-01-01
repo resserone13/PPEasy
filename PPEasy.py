@@ -201,7 +201,9 @@ class Mask(Scene):
 
         self.papr_link = LabelNode('PAPR', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.40), color=text_color, parent=self)
 
-        self.lvl3_mask = SpriteNode('FrontMask 2.PNG', position=(self.size.w * 0.75, self.size.h * 0.30), scale=0.25, parent=self)
+        self.lvl1_mask = SpriteNode('FrontMask 2.PNG', position=(self.size.w * 0.75, self.size.h * 0.30), scale=0.25, parent=self)
+
+	self.lvl3_mask = SpriteNode('Level3Mask.PNG', position=(self.size.w * 0.75, self.size.h * 0.15), scale=0.25, parent=self, z_position=1)
 
         self.kn95_mask = SpriteNode('Kn95Mask.PNG', position=(self.size.w * 0.25, self.size.h * 0.15), scale=0.23, parent=self)
 
