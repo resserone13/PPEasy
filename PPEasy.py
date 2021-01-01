@@ -26,7 +26,7 @@ class  Intro(Scene):
         
         self.text = 'Thanks for being safe'
         
-        self.discription = LabelNode(f'{self.text}', (text_font, 25), position=(self.size.w/2, self.size.h * 0.25), color=text_color, parent=self)      
+        self.description = LabelNode(f'{self.text}', (text_font, 25), position=(self.size.w/2, self.size.h * 0.25), color=text_color, parent=self)      
         
         self.run_action(A.sequence(A.wait(3), A.call(self.dismiss_scene)))
     
@@ -118,7 +118,7 @@ class MyScene (Scene):
             sc = Any()
             sc.title_param = 'FaceSheild.JPG'
             sc.image_param = 'Faceshield'
-            sc.text_param  = 'Face sheilds protect the entire face, \nincluding the eyes, from any splashes \nor sprays, which along with the nose \nand mouth can be a gateway for the \ncoronavirus. Wearing a face shield \nmay make you less likely to touch your \nface with unwashed hands. You should \nware a face sheild while caring for \npatients. You never know what may \ncause something to splash towards \nyour face.'    
+            sc.text_param  = 'Face sheilds protect the entire face, \nincluding the eyes, from any splashes \nor sprays, which along with the nose \nand mouth can be a gateway for the \ncoronavirus. Wearing a face shield \nmay make you less likely to touch your \nface with unwashed hands. You should \nware a face shield while caring for \npatients. You never know what may \ncause something to splash towards \nyour face.'    
             
             self.present_modal_scene(sc)
 
@@ -214,7 +214,7 @@ class Mask(Scene):
             sc = Any()
             sc.title_param = 'LEVEL 1'
             sc.image_param = 'FrontMask 2.PNG'
-            sc.text_param  = "A level 1 mask provides adequate \nprotection in areas such as lobbies \nand the cafeteria. Its primary \nfunction is to stop any saliva\nor mucus from being transfered from \nperson to person \nIt's not recommended to wear \na level 1 mask while caring \nfor patients."
+            sc.text_param  = "A level 1 mask provides adequate \nprotection in areas such as lobbies \nand the cafeteria. Its primary \nfunction is to stop any saliva\nor mucus from being transferred from \nperson to person \nIt's not recommended to wear \na level 1 mask while caring \nfor patients."
             self.present_modal_scene(sc)
 
         if touch.location in self.level_3_box.frame:
@@ -269,7 +269,7 @@ class Any(Scene):
             
         self.txt = text
         
-        self.discription = LabelNode(f'{self.text_param}', (text_font, 20), position=(self.size.w/2, self.size.h * 0.25), color=text_color, parent=self)    
+        self.description = LabelNode(f'{self.text_param}', (text_font, 20), position=(self.size.w/2, self.size.h * 0.25), color=text_color, parent=self)    
         
         self.back = SpriteNode('iob:ios7_redo_32', position=(self.size.w * 0.87, self.size.h * 0.95), parent=self)      
         
