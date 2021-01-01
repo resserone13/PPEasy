@@ -90,7 +90,7 @@ class MyScene (Scene):
         
         self.scene_title = LabelNode(app_title, font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self) 
                         
-        self.mask_link = LabelNode('MASK',font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.80), color=text_color, parent=self)
+        self.mask_link = LabelNode('MASKS',font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.80), color=text_color, parent=self)
     
         self.face_shield_link = LabelNode('FACE SHIELDS', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.70), color=text_color, parent=self)
         
@@ -116,8 +116,8 @@ class MyScene (Scene):
                 
         if touch.location in self.sheild_box.frame:
             sc = Any()
-            sc.title_param = 'FaceSheild.JPG'
-            sc.image_param = 'Faceshield'
+            sc.title_param = 'Faceshield'
+            sc.image_param = 'FaceSheild.JPG'
             sc.text_param  = 'Face sheilds protect the entire face, \nincluding the eyes, from any splashes \nor sprays, which along with the nose \nand mouth can be a gateway for the \ncoronavirus. Wearing a face shield \nmay make you less likely to touch your \nface with unwashed hands. You should \nware a face shield while caring for \npatients. You never know what may \ncause something to splash towards \nyour face.'    
             
             self.present_modal_scene(sc)
@@ -404,14 +404,14 @@ class Wipes(Scene):
 
         if touch.location in self.sani_box.frame:
             sc = Any()
-            sc.title_param = 'SANI'
+            sc.title_param = 'BLEACH'
             sc.image_param = 'BleachWipes.PNG'
             sc.text_param  = 'Bleach is a Sporicidal disinfectant. \nThe active ingredient is Sodium \nhypochlorite. Bleach kills the \nbacteria that causes C-Diff \nand should always be used to \ndisinfect anything that may be \ncontaminated with C-Diff.'
             self.present_modal_scene(sc)
 
         if touch.location in self.bleach_box.frame:
             sc = Any()
-            sc.title_param = 'BLEACH'
+            sc.title_param = 'SANI'
             sc.image_param = 'SaniWipes.PNG'
             sc.text_param  = 'Sani is recommended for general \ndisinfecting. The active ingredient \nis Alcohol. It does NOT kill the \nbacteria that causes C-Diff and \nshould never be used to \ndisinfect anything that may be \ncontaminated nwith C-Diff.'
             self.present_modal_scene(sc)
