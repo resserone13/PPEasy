@@ -1,33 +1,31 @@
-import math
-import random
-
-import sound
-import ui
 from scene import *
+import sound
+import random
+import math
+import ui
+
 
 A = Action
-
 app_title = 'PPEasy'
 app_title_font = '<System>'
 text_font = '<System>'
 text_color = 'black'
 bg_color = '74C69D'
 btn_border_color = '40916C'
-border_color = 'gray'
+#border_color = 'gray'
 btn_color = '74C69D'
 btn_shadow=('1B4332', 0, 7, 2)
 border_radias = 30
 
 class  Intro(Scene):
-	def setup(self):
+	def setup(self): 
 		self.main_node = Node(parent=self)
-		
 		self.title_node = Node(position=self.size/2, parent=self)
 
 		self.intro_bg = SpriteNode(position=self.size/2, color=bg_color, size=self.size, alpha=1, parent=self)
 		
 		self.app_title = LabelNode('PPEasy', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.55), color=text_color, parent=self)
-
+		
 		self.text_line = ShapeNode(ui.Path.rounded_rect(0, 0, self.size.w * 0.55, 0, 20))
 		self.text_line.position=self.size.w/2, self.size.h * .50
 		self.text_line.fill_color=btn_color
@@ -53,25 +51,30 @@ class MyScene (Scene):
 		box.stroke_color=btn_border_color
 		box.shadow=btn_shadow
 		self.add_child(box)
-		return box    
-		  
+		return box
+		 
+	def make_link(self, name, locale: float) -> LabelNode:
+	    link = LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * locale), color=text_color, parent=self)
+	    return link
+	    
 	def setup(self):
+		
 		self.main_node = Node(parent=self)
-
+		
 		self.background_color = bg_color
-
+		
 		self.mask_box = self.make_box(0.79)
 		self.shield_box = self.make_box(0.69)
 		self.gowns_box = self.make_box(0.59)
 		self.wipes_box = self.make_box(0.49)
 		self.faq_box = self.make_box(0.39)
 		self.dd_box = self.make_box(0.29)
-
+		
 		self.scene_title = LabelNode(app_title, font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)	
 		
 		for i, name in enumerate(('MASKS', 'FACE SHIELDS', 'GOWNS', 'WIPES', 'FAQ', "Dos/Don'ts")):
-			LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
-				
+		    LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
+			
 		self.present_modal_scene(Intro())
 		
 	def did_change_size(self):
@@ -135,30 +138,28 @@ class Mask(Scene):
 		box.stroke_color=btn_border_color
 		box.shadow=btn_shadow
 		self.add_child(box)
-		return box   
-		    
+		return box
+		
 	def setup(self):
 		self.bg_color = SpriteNode(color=bg_color, size=self.size, position=(self.size.w/2, self.size.h/2), parent=self)
 		
 		self.level_1_box = self.make_box(0.79)
-		self.level_3_box = self.make_box(0.69)
-		self.k_n95_box = self.make_box(0.59)
-		self.n95_box = self.make_box(0.49)
-		self.papr_box = self.make_box(0.39)
 
+		self.level_3_box = self.make_box(0.69)
+
+		self.k_n95_box = self.make_box(0.59)
+		
+		self.n95_box = self.make_box(0.49)
+		
+		self.papr_box = self.make_box(0.39)
+		
 		self.back = SpriteNode('iob:ios7_redo_32', position=(self.size.w * 0.87, self.size.h * 0.93), parent=self)
 		
-		self.scene_title = LabelNode('Mask', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)									
-		self.level_1_link = LabelNode('Level 1',font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.80), color=text_color, parent=self)
+		self.scene_title = LabelNode('Mask', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)
 		
-		self.level_3_link = LabelNode('Level 3', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.70), color=text_color, parent=self)
-		
-		self.k_n95_link = LabelNode('K-N95', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.60), color=text_color, parent=self)		
-		
-		self.n95_link = LabelNode('N95', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.50), color=text_color, parent=self)		
-
-		self.papr_link = LabelNode('PAPR', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.40), color=text_color, parent=self)
-
+		for i, name in enumerate(('Level 1', 'Level 3', 'K-N95', 'N95', 'Papr')):
+		    LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
+		    
 		self.lvl1_mask = SpriteNode('FrontMask 2.PNG', position=(self.size.w * 0.75, self.size.h * 0.30), scale=0.25, parent=self)
 
 		self.lvl3_mask = SpriteNode('Level3Mask.PNG', position=(self.size.w * 0.75, self.size.h * 0.15), scale=0.25, parent=self, z_position=1)
@@ -220,6 +221,7 @@ class Mask(Scene):
 			
 class Any(Scene):
 	def setup(self):
+		
 		self.bg_color = SpriteNode(color=bg_color, size=self.size, position=(self.size.w/2, self.size.h/2), parent=self)    
 		
 		self.root_node = Node(parent=self)  
@@ -255,8 +257,8 @@ class Gowns(Scene):
 		box.stroke_color=btn_border_color
 		box.shadow=btn_shadow
 		self.add_child(box)
-		return box   
-		    
+		return box
+		
 	def setup(self):
 	
 		self.bg_color = SpriteNode(color=bg_color, size=self.size, position=(self.size.w/2, self.size.h/2), parent=self)	
@@ -268,10 +270,9 @@ class Gowns(Scene):
 		
 		self.scene_title = LabelNode('Gowns', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)
 		
-		self.cloth_link = LabelNode('Cloth', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.80), color=text_color, parent=self)
-
-		self.plastic_link = LabelNode('Plastic',font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.70), color=text_color, parent=self)
-		
+		for i, name in enumerate(('Cloth', 'Plastic')):
+		    LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
+		    
 		self.cloth_label = LabelNode('Cloth', font=(text_font, 30), position=(self.size.w  * 0.25, self.size.h * 0.50), color=text_color, parent=self.root_node)										
 		self.plastic_label = LabelNode('Plastic',font=(text_font, 30), position=(self.size.w * 0.75, self.size.h * 0.60), color=text_color, parent=self.root_node)
 		
@@ -314,7 +315,7 @@ class Wipes(Scene):
 		box.shadow=btn_shadow
 		self.add_child(box)
 		return box
-		    
+		
 	def setup(self):
 		self.bg_color = SpriteNode(color=bg_color, size=self.size, position=(self.size.w/2, self.size.h/2), parent=self)
 		
@@ -323,16 +324,11 @@ class Wipes(Scene):
 		self.bleach_box = self.make_box(0.59)
 		self.ammonia_box = self.make_box(0.49)
 		
-		self.scene_title = LabelNode('Wipes', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)	
-
-		self.oxy_link = LabelNode('Oxyvir',font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.80), color=text_color, parent=self)
+		self.scene_title = LabelNode('Wipes', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)
 		
-		self.alcohol_link = LabelNode('Sani (Alcohol)', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.70), color=text_color, parent=self)
+		for i, name in enumerate(('Oxivir', 'Sani (Alcohol)', 'Bleach', 'Ammonia')):
+		    LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
 		
-		self.bleach_link = LabelNode('Bleach', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.60), color=text_color, parent=self)
-		
-		self.ammonia_link = LabelNode('Ammonia', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.50), color=text_color, parent=self)		
-
 		self.oxy = SpriteNode('OxyvirWipes.PNG', position=(self.size.w * 0.29, self.size.h * 0.35), scale=0.30, parent=self)
 
 		self.alcohol = SpriteNode('SaniWipes.PNG', position=(self.size.w * 0.75, self.size.h * 0.35), scale=0.30, parent=self)
@@ -344,6 +340,7 @@ class Wipes(Scene):
 		self.back = SpriteNode('iob:ios7_redo_32', position=(self.size.w * 0.87, self.size.h * 0.95), parent=self)		
 		
 	def touch_began(self, touch):
+		
 		if touch.location in self.back.frame:
 			self.dismiss_modal_scene()	
 
