@@ -20,7 +20,6 @@ border_radias = 30
 
 class  Intro(Scene):
 	def setup(self):
-	    
 		self.main_node = Node(parent=self)
 		
 		self.title_node = Node(position=self.size/2, parent=self)
@@ -57,32 +56,22 @@ class MyScene (Scene):
 		return box    
 		  
 	def setup(self):
-		
 		self.main_node = Node(parent=self)
-		
+
 		self.background_color = bg_color
-		
+
 		self.mask_box = self.make_box(0.79)
 		self.shield_box = self.make_box(0.69)
 		self.gowns_box = self.make_box(0.59)
 		self.wipes_box = self.make_box(0.49)
 		self.faq_box = self.make_box(0.39)
 		self.dd_box = self.make_box(0.29)
-		
+
 		self.scene_title = LabelNode(app_title, font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)	
 		
-		self.mask_link = LabelNode('MASK',font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.80), color=text_color, parent=self)
-		
-		self.face_shield_link = LabelNode('FACE SHIELDS', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.70), color=text_color, parent=self)
-		
-		self.gown_link = LabelNode('GOWNS', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.60), color=text_color, parent=self)
-		
-		self.wipes_link = LabelNode('WIPES', (text_font, 30), position=(self.size.w/2, self.size.h * 0.50), color=text_color, parent=self)
-		
-		self.faq_link = LabelNode('FAQ', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.40), color=text_color, parent=self)
-		
-		self.dd_link = LabelNode("Dos/Don'ts", font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.30), color=text_color, parent=self)
-		
+		for i, name in enumerate(('MASKS', 'FACE SHIELDS', 'GOWNS', 'WIPES', 'FAQ', "Dos/Don'ts")):
+			LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
+				
 		self.present_modal_scene(Intro())
 		
 	def did_change_size(self):
@@ -149,19 +138,14 @@ class Mask(Scene):
 		return box   
 		    
 	def setup(self):
-
 		self.bg_color = SpriteNode(color=bg_color, size=self.size, position=(self.size.w/2, self.size.h/2), parent=self)
 		
 		self.level_1_box = self.make_box(0.79)
-
 		self.level_3_box = self.make_box(0.69)
-
 		self.k_n95_box = self.make_box(0.59)
-		
 		self.n95_box = self.make_box(0.49)
-		
 		self.papr_box = self.make_box(0.39)
-		
+
 		self.back = SpriteNode('iob:ios7_redo_32', position=(self.size.w * 0.87, self.size.h * 0.93), parent=self)
 		
 		self.scene_title = LabelNode('Mask', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)									
@@ -236,7 +220,6 @@ class Mask(Scene):
 			
 class Any(Scene):
 	def setup(self):
-		
 		self.bg_color = SpriteNode(color=bg_color, size=self.size, position=(self.size.w/2, self.size.h/2), parent=self)    
 		
 		self.root_node = Node(parent=self)  
@@ -361,7 +344,6 @@ class Wipes(Scene):
 		self.back = SpriteNode('iob:ios7_redo_32', position=(self.size.w * 0.87, self.size.h * 0.95), parent=self)		
 		
 	def touch_began(self, touch):
-		
 		if touch.location in self.back.frame:
 			self.dismiss_modal_scene()	
 
