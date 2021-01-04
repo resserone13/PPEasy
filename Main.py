@@ -1,9 +1,9 @@
-from scene import *
-import sound
-import random
 import math
-import ui
+import random
 
+import sound
+import ui
+from scene import *
 
 A = Action
 app_title = 'PPEasy'
