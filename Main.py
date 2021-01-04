@@ -6,15 +6,16 @@ import ui
 
 
 A = Action
+
 app_title = 'PPEasy'
-app_title_font = '4361EE'
+app_title_font = '<System>'
 text_font = '<System>'
 text_color = 'black'
-bg_color = '4361EE'
-btn_border_color = 'white'
+bg_color = '74C69D'
+btn_border_color = '40916C'
 border_color = 'gray'
-btn_color = '4361EE'
-btn_shadow=('gray', 0, 7, 2)
+btn_color = '74C69D'
+btn_shadow=('1B4332', 0, 7, 2)
 border_radias = 30
 
 class  Intro(Scene):
