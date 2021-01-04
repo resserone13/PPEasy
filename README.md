@@ -1,9 +1,6 @@
 # PPEasy
-Personal protective equipment 
-educational app
+Personal protective equipment educational app
 
-This app explains the difference 
-between personal protective equipment 
-and when you should use it.
+This iOS app explains the difference between personal protective equipment and when you should use them.
 
-Credits to ccc and cvp
+Credits to [@cclauss](https://github.com/cclauss) and [@cvpe](https://github.com/cvpe)
