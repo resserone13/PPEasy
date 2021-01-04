@@ -124,12 +124,12 @@ class MyScene (Scene):
 		if touch.location in self.mask_box.frame:
 			self.present_modal_scene(Mask())
 			
-		if touch.location in self.sheild_box.frame:
+		if touch.location in self.shield_box.frame:
 			sc = Any()
 			sc.scale_param=0.25
-			sc.title_param = 'FaceSheild'
-			sc.image_param = 'FaceSheild.JPG'
-			sc.text_param  = 'Face sheilds protect the entire face, \nincluding the eyes, from any splashes \nor sprays, which along with the nose \nand mouth can be a gateway for the \ncoronavirus. Wearing a face shield \nmay make you less likely to touch your \nface with unwashed hands. You should \nware a face sheild while caring for \npatients. You never know what may \ncause something to splash towards \nyour face.'	
+			sc.title_param = 'FaceShield'
+			sc.image_param = 'FaceShield.JPG'
+			sc.text_param  = 'Face shields protect the entire face, \nincluding the eyes, from any splashes \nor sprays, which along with the nose \nand mouth can be a gateway for the \ncoronavirus. Wearing a face shield \nmay make you less likely to touch your \nface with unwashed hands. You should \nware a face shield while caring for \npatients. You never know what may \ncause something to splash towards \nyour face.'	
 			
 			self.present_modal_scene(sc)
 
