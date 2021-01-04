@@ -19,35 +19,38 @@ border_radias = 30
 
 class  Intro(Scene):
 	def setup(self):
+	    
+		self.main_node = Node(parent=self)
+		
+		self.title_node = Node(position=self.size/2, parent=self)
 
 		self.intro_bg = SpriteNode(position=self.size/2, color=bg_color, size=self.size, alpha=1, parent=self)
-				
-		self.app_title = LabelNode('PPEasy', font=(app_title_font, 50), position=(self.size/2), color=text_color, parent=self)
+		
+		self.app_title = LabelNode('PPEasy', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.55), color=text_color, parent=self)
 
 		self.text_line = ShapeNode(ui.Path.rounded_rect(0, 0, self.size.w * 0.55, 0, 20))
-		self.text_line.position=self.size.w/2, self.size.h * .45
+		self.text_line.position=self.size.w/2, self.size.h * .50
 		self.text_line.fill_color=btn_color
-		self.text_line.line_width=4
+		self.text_line.line_width=2
 		self.text_line.stroke_color=text_color
 		self.add_child(self.text_line)
-					
+		
 		self.text = 'Thanks for being safe.'
 		
-		self.description = LabelNode(f'{self.text}', (text_font, 25), position=(self.size.w/2, self.size.h * 0.25), color=text_color, parent=self)		
+		self.description = LabelNode(f'{self.text}', (text_font, 25), position=(self.size.w/2, self.size.h * 0.45), color=text_color, parent=self)		
 		
 		self.run_action(A.sequence(A.wait(4), A.call(self.dismiss_scene)))
-	
-	
+		
 	def dismiss_scene(self):
 		self.dismiss_modal_scene()		
-	
+		
 class MyScene (Scene):
 	def setup(self):
 		
 		self.main_node = Node(parent=self)
-				
+		
 		self.background_color = bg_color
-				
+		
 		self.mask_box = ShapeNode(ui.Path.rounded_rect(0, 0, self.size.w * 0.65, self.size.h * 0.07, 20))
 		self.mask_box.position=(self.size.w/2, self.size.h * 0.79)
 		self.mask_box.fill_color=btn_color
@@ -96,13 +99,13 @@ class MyScene (Scene):
 		self.add_child(self.dd_box)	
 		
 		self.scene_title = LabelNode(app_title, font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)	
-						
+		
 		self.mask_link = LabelNode('MASK',font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.80), color=text_color, parent=self)
-	
+		
 		self.face_shield_link = LabelNode('FACE SHIELDS', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.70), color=text_color, parent=self)
 		
 		self.gown_link = LabelNode('GOWNS', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.60), color=text_color, parent=self)
-				
+		
 		self.wipes_link = LabelNode('WIPES', (text_font, 30), position=(self.size.w/2, self.size.h * 0.50), color=text_color, parent=self)
 		
 		self.faq_link = LabelNode('FAQ', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.40), color=text_color, parent=self)
@@ -113,16 +116,17 @@ class MyScene (Scene):
 		
 	def did_change_size(self):
 		pass
-	
+		
 	def update(self):
 		pass
-	
+		
 	def touch_began(self, touch):
 		if touch.location in self.mask_box.frame:
 			self.present_modal_scene(Mask())
-				
+			
 		if touch.location in self.sheild_box.frame:
 			sc = Any()
+			sc.scale_param=0.25
 			sc.title_param = 'FaceSheild'
 			sc.image_param = 'FaceSheild.JPG'
 			sc.text_param  = 'Face sheilds protect the entire face, \nincluding the eyes, from any splashes \nor sprays, which along with the nose \nand mouth can be a gateway for the \ncoronavirus. Wearing a face shield \nmay make you less likely to touch your \nface with unwashed hands. You should \nware a face sheild while caring for \npatients. You never know what may \ncause something to splash towards \nyour face.'	
@@ -150,7 +154,6 @@ class MyScene (Scene):
 			tv.separator_color='clear'
 			tv.background_color=bg_color
 			
-		
 			items = ['Don’t put the mask around \nyour neck or up on your forehead. \n\nDon’t touch the mask, \nif you do, wash your hands \nor use hand sanitizer to disinfect.',]
 			tv.data_source = ui.ListDataSource(items=items)
 
@@ -158,7 +161,7 @@ class MyScene (Scene):
 			
 	def touch_moved(self, touch):
 		pass
-	
+		
 	def touch_ended(self, touch):
 		pass
 		
@@ -166,7 +169,7 @@ class Mask(Scene):
 	def setup(self):
 
 		self.bg_color = SpriteNode(color=bg_color, size=self.size, position=(self.size.w/2, self.size.h/2), parent=self)
-					
+		
 		self.level_1_box = ShapeNode(ui.Path.rounded_rect(0, 0, self.size.w * 0.65, self.size.h * 0.07, 20))
 		self.level_1_box.position=(self.size.w/2, self.size.h * 0.79)
 		self.level_1_box.fill_color=btn_color
@@ -206,12 +209,12 @@ class Mask(Scene):
 		self.papr_box.stroke_color=btn_border_color
 		self.papr_box.shadow=btn_shadow		
 		self.add_child(self.papr_box)
-				
+		
 		self.back = SpriteNode('iob:ios7_redo_32', position=(self.size.w * 0.87, self.size.h * 0.93), parent=self)
-				
+		
 		self.scene_title = LabelNode('Mask', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)									
 		self.level_1_link = LabelNode('Level 1',font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.80), color=text_color, parent=self)
-	
+		
 		self.level_3_link = LabelNode('Level 3', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.70), color=text_color, parent=self)
 		
 		self.k_n95_link = LabelNode('K-N95', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.60), color=text_color, parent=self)		
@@ -233,13 +236,15 @@ class Mask(Scene):
 	def touch_began(self, touch):
 		if touch.location in self.level_1_box.frame:		
 			sc = Any()
+			sc.scale_param=0.50
 			sc.title_param = 'LEVEL 1'
 			sc.image_param = 'FrontMask 2.PNG'
-			sc.text_param  = "A level 1 mask provides adequate \nprotection in areas such as lobbies \nand the cafeteria. Its primary \nfunction is to stop any saliva\nor mucus from being transfered from \nperson to person \nIt's not recommended to wear \na level 1 mask while caring \nfor patients."
+			sc.text_param  = "A level 1 mask provides adequate \nprotection in areas such as lobbies \nand the cafeteria. Its primary \nfunction is to stop any saliva\nor mucus from being transferred from \nperson to person \nIt's not recommended to wear \na level 1 mask while caring \nfor patients."
 			self.present_modal_scene(sc)
 
 		if touch.location in self.level_3_box.frame:
 			sc = Any()
+			sc.scale_param=0.50
 			sc.title_param = 'LEVEL 3'
 			sc.image_param = 'Level3Mask.PNG'
 			sc.text_param  = "A level 3 mask provides a higher \nlevel of protection than a level 1. \nAlthougth it looks very similar \na level 1 it can be distinguished \nfrom a level 1 by having at least 3 \nlayers of material. It also might \nhave a anti-fog stip to help with \nfogging. It's ok to ware a level 3 \nwhile around patients."
@@ -247,6 +252,7 @@ class Mask(Scene):
 			
 		if touch.location in self.k_n95_box.frame:
 			sc = Any()
+			sc.scale_param=0.50
 			sc.title_param = 'K-N95'
 			sc.image_param = 'Kn95Mask.PNG'
 			sc.text_param  = "K-N95 masks are usually thicker \nand tighter fitting than a level 1 or 3 \nand provide a higher level of \nprotection. It's recommended for \nuse in patient areas such as the \nEmergency Dept and patient floors. \nA K-N95 is NOT fit tested and is \nNOT the same as a N95."
@@ -254,6 +260,7 @@ class Mask(Scene):
 			
 		if touch.location in self.n95_box.frame:
 			sc = Any()
+			sc.scale_param=0.50
 			sc.title_param = 'N95'
 			sc.image_param = 'N95Mask.PNG'
 			sc.text_param  = "This is a N95 mask. \nIt should be worn while \ncaring for patients undergoing \nmedical procedures that \nhave been deemed as \naerosol generating procedures. \nYou should wear the N95 \nyou passed a fit test for."
@@ -261,9 +268,10 @@ class Mask(Scene):
 
 		if touch.location in self.papr_box.frame:
 			sc = Any()
+			sc.scale_param=0.50
 			sc.title_param = 'Papr'
 			sc.image_param = 'PaprMask.PNG'
-			sc.text_param  = "This is a Papr mask. \nIt is recommended for \nuse by individuals who \nhave not been or did not \npass a fit test. You should \nbe trained to ensure you \nproperly wear and clean \nthe Papr."
+			sc.text_param  = "Papr stands for Powered Air \nPurifying Respirator. It is \nrecommended for use by \nindividuals who have not been \nfit tested or did not pass a fit test. \nYou should be trained to ensure \nyou properly wear and \nclean the Papr."
 			self.present_modal_scene(sc)
 			
 		if touch.location in self.back.frame:
@@ -284,10 +292,10 @@ class Any(Scene):
 			self.text_line.stroke_color=text_color
 			self.add_child(self.text_line)
 			
-			self.title = LabelNode(self.title_param, (app_title_font, 30), position=(self.size.w/2, self.size.h * 0.85), color=text_color, parent=self)
-			
-			self.image = SpriteNode(self.image_param, position=(self.size.w/2, self.size.h * 0.60), scale=0.50, parent=self)
-			
+		self.title = LabelNode(self.title_param, (app_title_font, 30), position=(self.size.w/2, self.size.h * 0.85), color=text_color, parent=self)
+		
+		self.image = SpriteNode(self.image_param, scale=self.scale_param, position=(self.size.w/2, self.size.h * 0.60), parent=self)
+		
 		self.txt = text
 		
 		self.description = LabelNode(f'{self.text_param}', (text_font, 20), position=(self.size.w/2, self.size.h * 0.25), color=text_color, parent=self)    
@@ -320,26 +328,27 @@ class Gowns(Scene):
 		self.plastic_box.stroke_color=btn_border_color
 		self.plastic_box.shadow=btn_shadow		
 		self.root_node.add_child(self.plastic_box)	
-										
+		
 		self.scene_title = LabelNode('Gowns', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)
-	
+		
 		self.cloth_link = LabelNode('Cloth', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.80), color=text_color, parent=self.root_node)
 
 		self.plastic_link = LabelNode('Plastic',font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.70), color=text_color, parent=self.root_node)
 		
 		self.cloth_label = LabelNode('Cloth', font=(text_font, 30), position=(self.size.w  * 0.25, self.size.h * 0.50), color=text_color, parent=self.root_node)										
 		self.plastic_label = LabelNode('Plastic',font=(text_font, 30), position=(self.size.w * 0.75, self.size.h * 0.60), color=text_color, parent=self.root_node)
-			
+		
 		self.plastic = SpriteNode('PlasticGown.PNG', position=(self.size.w * 0.75, self.size.h * 0.40), scale=0.75, parent=self.root_node)
 
 		self.cloth = SpriteNode('ClothGown.PNG', position=(self.size.w * 0.26, self.size.h * 0.26), scale=0.70, parent=self)		
 		
 		self.back = SpriteNode('iob:ios7_redo_32', position=(self.size.w * 0.87, self.size.h * 0.95), parent=self)		
-	
+		
 	def touch_began(self, touch):
 
 		if touch.location in self.cloth_box.frame:
 			sc = Any()
+			sc.scale_param=0.50
 			sc.title_param = 'CLOTH'
 			sc.image_param = 'ClothGown.PNG'
 			sc.text_param  = 'This is a cloth gown. \nIt must be worn while \nproviding care to patients \nwho are in isolation. \n\nIts NOT recommended to \nwear a cloth gown while \ncaring for patients \nwith C-diff or TB.'
@@ -347,6 +356,7 @@ class Gowns(Scene):
 
 		if touch.location in self.plastic_box.frame:
 			sc = Any()
+			sc.scale_param=0.50
 			sc.title_param = 'PLASTIC'
 			sc.image_param = 'PlasticGown.PNG'
 			sc.text_param  = 'This is a plastic gown. \nIt must be worn while \nproviding care to C-Diff \npatients. \n\nIts is recommended to \nwear a plastic gown while \nproviding care to patients \nwith TB.'
@@ -354,7 +364,7 @@ class Gowns(Scene):
 
 		if touch.location in self.back.frame:
 			self.dismiss_modal_scene()	
-						
+			
 class Wipes(Scene):
 	def setup(self):
 		self.bg_color = SpriteNode(color=bg_color, size=self.size, position=(self.size.w/2, self.size.h/2), parent=self)			
@@ -390,11 +400,11 @@ class Wipes(Scene):
 		self.ammonia_box.stroke_color=btn_border_color
 		self.ammonia_box.shadow=btn_shadow		
 		self.add_child(self.ammonia_box)
-					
+		
 		self.scene_title = LabelNode('Wipes', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)	
 
 		self.oxy_link = LabelNode('Oxyvir',font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.80), color=text_color, parent=self)
-	
+		
 		self.alcohol_link = LabelNode('Sani (alcohol)', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.70), color=text_color, parent=self)
 		
 		self.bleach_link = LabelNode('Bleach', font=(text_font, 30), position=(self.size.w/2, self.size.h * 0.60), color=text_color, parent=self)
@@ -410,7 +420,7 @@ class Wipes(Scene):
 		self.ammonia = SpriteNode('AmmoniaWipes.PNG', position=(self.size.w * 0.75, self.size.h * 0.15), scale=0.30, parent=self)
 		
 		self.back = SpriteNode('iob:ios7_redo_32', position=(self.size.w * 0.87, self.size.h * 0.95), parent=self)		
-	
+		
 	def touch_began(self, touch):
 		
 		if touch.location in self.back.frame:
@@ -418,6 +428,7 @@ class Wipes(Scene):
 
 		if touch.location in self.oxy_box.frame:
 			sc = Any()
+			sc.scale_param=0.50
 			sc.title_param = 'OXIVIR'
 			sc.image_param = 'OxyvirWipes.PNG'
 			sc.text_param  = 'Oxivir is recommended for general \ndisinfecting. The active ingredient \nhydrogen peroxide. It does NOT \nkill the bacteria that causes C-Diff \nand should never be used to \ndisinfect anything that may be \ncontaminated with C-Diff.'
@@ -425,24 +436,27 @@ class Wipes(Scene):
 
 		if touch.location in self.sani_box.frame:
 			sc = Any()
+			sc.scale_param=0.50
 			sc.title_param = 'SANI'
-			sc.image_param = 'BleachWipes.PNG'
-			sc.text_param  = 'Bleach is a Sporicidal disinfectant. \nThe active ingredient is Sodium \nhypochlorite. Bleach kills the \nbacteria that causes C-Diff \nand should always be used to \ndisinfect anything that may be \ncontaminated with C-Diff.'
-			self.present_modal_scene(sc)
-
-		if touch.location in self.bleach_box.frame:
-			sc = Any()
-			sc.title_param = 'BLEACH'
 			sc.image_param = 'SaniWipes.PNG'
 			sc.text_param  = 'Sani is recommended for general \ndisinfecting. The active ingredient \nis Alcohol. It does NOT kill the \nbacteria that causes C-Diff and \nshould never be used to \ndisinfect anything that may be \ncontaminated nwith C-Diff.'
 			self.present_modal_scene(sc)
 
+		if touch.location in self.bleach_box.frame:
+			sc = Any()
+			sc.scale_param=0.50
+			sc.title_param = 'BLEACH'
+			sc.image_param = 'BleachWipes.PNG'
+			sc.text_param  = 'Bleach is a Sporicidal disinfectant. \nThe active ingredient is Sodium \nhypochlorite. Bleach kills the \nbacteria that causes C-Diff \nand should always be used to \ndisinfect anything that may be \ncontaminated with C-Diff.'
+			self.present_modal_scene(sc)
+
 		if touch.location in self.ammonia_box.frame:
 			sc = Any()
+			sc.scale_param=0.50
 			sc.title_param = 'AMMONIA'
 			sc.image_param = 'AmmoniaWipes.PNG'
 			sc.text_param  = 'Ammonia is recommended for \ncleaning sensitive electiral devices. \nThe active ingredient Ammonia. \nIt does NOT kill the bacteria that \ncauses C-Diff and should never \nbe used to disinfect anything that \nmay be contaminated with C-Diff.'
 			self.present_modal_scene(sc)
 			
 if __name__ == '__main__':
-	run(MyScene(), show_fps=False)
+	run(MyScene(), PORTRAIT, show_fps=False)
