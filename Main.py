@@ -1,4 +1,4 @@
-Import math
+import math
 import random
 import sound
 import ui
