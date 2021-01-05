@@ -1,6 +1,5 @@
+Import math
 import random
-import math
-
 import sound
 import ui
 from scene import *
