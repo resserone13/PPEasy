@@ -1,19 +1,21 @@
-import math
 import random
+import math
+
 import sound
 import ui
 from scene import *
 
 A = Action
 app_title = 'PPEasy'
-app_title_font = '<System>'
+app_title_font = 'Didot'
+btn_font = 'Didot'
 text_font = '<System>'
 text_color = 'black'
 bg_color = '74C69D'
 btn_border_color = '40916C'
 btn_color = 'B7E4C7'
 btn_shadow=('1B4332', 0, 7, 2)
-border_radias = 30
+border_radias = 10
 
 class  Intro(Scene):
 	def setup(self): 
@@ -28,9 +30,9 @@ class  Intro(Scene):
 		self.text_line.stroke_color=text_color
 		self.add_child(self.text_line)
 		
-		self.text = 'Thanks for being safe.'
+		self.text = 'Thanks for being safe'
 		
-		self.description = LabelNode(f'{self.text}', (text_font, 25), position=(self.size.w/2, self.size.h * 0.45), color=text_color, parent=self)		
+		self.description = LabelNode(f'{self.text}', (app_title_font, 25), position=(self.size.w/2, self.size.h * 0.45), color=text_color, parent=self)		
 		self.run_action(A.sequence(A.wait(4),A.fade_to(0, 3), A.wait(3), A.call(self.dismiss_scene)))
 		
 	def dismiss_scene(self):
@@ -56,12 +58,13 @@ class MyScene (Scene):
 		self.wipes_box = self.make_box(0.49)
 		self.faq_box = self.make_box(0.39)
 		self.dd_box = self.make_box(0.29)
-		self.links_box = self.make_box(0.19)
+		self.covid_box = self.make_box(0.19)
+		self.links_box = self.make_box(0.09)
 		
 		self.scene_title = LabelNode(app_title, font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)	
 		
-		for i, name in enumerate(('Masks', 'Face Shields', 'Gowns', 'Wipes', 'FAQ', "Dos/Don'ts", 'Links')):
-		    LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
+		for i, name in enumerate(('Masks', 'Face Shields', 'Gowns', 'Wipes', 'FAQ', "Dos/Don'ts", 'Covid Info','Links')):
+		    LabelNode(name, font=(btn_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
 		
 		self.run_action(A.sequence(A.fade_to(0.1, 0), A.wait(2), A.fade_to(1, 0.3)))
 			
@@ -93,21 +96,40 @@ class MyScene (Scene):
 			self.present_modal_scene(Wipes())		
 
 		if touch.location in self.faq_box.frame:
-			tv = ui.TableView()
-			tv.separator_color='40916C'
-			tv.background_color=bg_color	
-			tv.editing=False		
-			items = ['Q. What is the difference between \na K-N96 and a N95?', 'A. Both products are said to filter \n95 percent of aerosol particulates. \nKN95 respirators differ from N95 \nrespirators because they meet the \nChinese standard but are not \nregulated by U.S. agencies.', "Q. Do mask really work?", "A. Hell Yes"]
-			tv.data_source = ui.ListDataSource(items=items)
-			tv.present(hide_title_bar=True)		
-
+		    sc = TextScene()
+		    sc.font_size_param= 18
+		    sc.anchor= 0.01, 0.8
+		    sc.w_locale= 0.10
+		    sc.h_locale= 0.80
+		    sc.text_param = 'Q. What is the difference between a K-N96 \nand a N95?''\n\nA. Both products are said to filter 95 percent \nof aerosol particulates. \nKN95 respirators differ from N95 \nrespirators because they meet the \nChinese standard but are not \nregulated by U.S. agencies.'"\n\nQ. Do mask really work?\n\nA. Yes. It stops the transmission \nof saliva and mucus from \nperson to person"
+		    self.present_modal_scene(sc)
+		    
 		if touch.location in self.dd_box.frame:
-			tv = ui.TableView()
-			tv.separator_color='40916C'
-			tv.background_color=bg_color
-			items = ['Don’t put the mask around \nyour neck or up on your forehead. \n\nDon’t touch the mask, \nif you do, wash your hands \nor use hand sanitizer to disinfect.',]
-			tv.data_source = ui.ListDataSource(items=items)
-			tv.present(hide_title_bar=True)		
+		    sc = TextScene()
+		    sc.font_size_param= 18
+		    sc.anchor= 0.01, 0
+		    sc.w_locale= 0.10
+		    sc.h_locale= 0.80
+		    sc.text_param = 'Don’t put the mask around \nyour neck or up on your forehead. \n\nDon’t touch the mask, \nif you do, wash your hands \nor use hand sanitizer to disinfect.'
+		    self.present_modal_scene(sc)
+		
+		if touch.location in self.covid_box.frame:
+		    sc = TextScene()
+		    sc.font_size_param= 18
+		    sc.anchor= 0.01, 0.8
+		    sc.w_locale= 0.10
+		    sc.h_locale= 0.75
+		    sc.text_param = 'Symptoms may appear 2-14 days after \nexposure to the virus. People with these \nsymptoms may have COVID-19:\n\n•Fever or chills\n•Cough\n•Shortness of breath or difficulty breathing\n•Fatigue\n•Muscle or body aches\n•Headache\n•New loss of taste or smell\n•Sore throat\n•Congestion or runny nose\n•Nausea or vomiting\n•Diarrhea \n\nEmergency warning signs. \nIf someone is showing any of \nthese signs, seek emergency medical \ncare immediately:\n\n•Trouble breathing\n•Persistent pain or pressure in the chest\n•New confusion\n•Inability to wake or stay awake\n•Bluish lips or face'
+		    self.present_modal_scene(sc)
+		    
+		if touch.location in self.links_box.frame:
+		    sc = TextScene()
+		    sc.font_size_param= 20
+		    sc.anchor = 0.5, 0.5
+		    sc.w_locale= 0.50
+		    sc.h_locale= 0.50
+		    sc.text_param = 'www.who.int\nwww.cdv.gov\nwww.fda.gov'
+		    self.present_modal_scene(sc)
 			
 	def touch_moved(self, touch):
 		pass
@@ -140,7 +162,7 @@ class Mask(Scene):
 		self.scene_title = LabelNode('Mask', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)
 		
 		for i, name in enumerate(('Level 1', 'Level 3', 'K-N95', 'N95', 'Papr')):
-		    LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
+		    LabelNode(name, font=(btn_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
 		    
 		self.lvl1_mask = SpriteNode('FrontMask 2.PNG', position=(self.size.w * 0.75, self.size.h * 0.30), scale=0.25, parent=self)
 
@@ -224,7 +246,22 @@ class Any(Scene):
 	def touch_began(self, touch):
 		if touch.location in self.back.frame:
 			self.dismiss_modal_scene()
-
+			
+			
+class TextScene(Scene):
+    def setup(self):
+        self.bg_color = SpriteNode(color=bg_color, size=self.size, position=(self.size.w/2, self.size.h/2), parent=self)
+        
+        self.text = LabelNode(self.text_param, font=(text_font, self.font_size_param), position=(self.size.w * self.w_locale, self.size.h * self.h_locale), color=text_color, parent=self)
+    
+        self.text.anchor_point = self.anchor
+        
+        self.back = SpriteNode('iob:ios7_undo_32', position=(self.size.w * 0.87, self.size.h * 0.93), parent=self)
+    
+    def touch_began(self, touch):
+        if touch.location in self.back.frame:
+            self.dismiss_modal_scene()
+        
 class Gowns(Scene):
 	def make_box(self, size_factor: float) -> ShapeNode:
 		box = ShapeNode(ui.Path.rounded_rect(0, 0, self.size.w * 0.65, self.size.h * 0.07, border_radias))
@@ -245,7 +282,7 @@ class Gowns(Scene):
 		self.scene_title = LabelNode('Gowns', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)
 		
 		for i, name in enumerate(('Cloth', 'Plastic')):
-		    LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
+		    LabelNode(name, font=(btn_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
 		    
 		self.cloth_label = LabelNode('Cloth', font=(text_font, 30), position=(self.size.w  * 0.25, self.size.h * 0.50), color=text_color, parent=self)										
 		self.plastic_label = LabelNode('Plastic',font=(text_font, 30), position=(self.size.w * 0.75, self.size.h * 0.60), color=text_color, parent=self)
@@ -301,7 +338,7 @@ class Wipes(Scene):
 		self.scene_title = LabelNode('Wipes', font=(app_title_font, 50), position=(self.size.w/2, self.size.h * 0.90), color=text_color, parent=self)
 		
 		for i, name in enumerate(('Oxivir', 'Sani (Alcohol)', 'Bleach', 'Ammonia')):
-		    LabelNode(name, font=(text_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
+		    LabelNode(name, font=(btn_font, 30), position=(self.size.w/2, self.size.h * (0.8 - i * 0.1)), color=text_color, parent=self)
 		
 		self.oxy = SpriteNode('OxyvirWipes.PNG', position=(self.size.w * 0.29, self.size.h * 0.35), scale=0.30, parent=self)
 
@@ -356,3 +393,10 @@ class Wipes(Scene):
 			
 if __name__ == '__main__':
 	run(MyScene(), PORTRAIT, show_fps=False)
+	
+	
+	
+
+
+
+
