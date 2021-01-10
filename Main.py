@@ -140,7 +140,7 @@ class MyScene (Scene):
 		    tv.line_break_mode = ui.LB_CHAR_WRAP
 		    tv.font= text_font, 17
 		    tv.frame= self.size.w * 0.07, self.size.h * 0.08, self.size.w * 0.87, self.size.h * 0.85
-		    tv.text = "DON'T improperly ware your mask. \n\nDON'T touch your mask, \nif you do, clean your hands. \n\nDON'T exposed your nose while waring a mask. \n\nDON'T remove your mask to talk. \n\nDON'T ware mask with vents. They allow your breath to escape and spread to others. \n "
+		    tv.text = "DON'T improperly ware your mask. \n\nDON'T touch your mask, \nif you do, clean your hands. \n\nDON'T exposed your nose while wearing a mask. \n\nDON'T remove your mask to talk. \n\nDON'T ware mask with vents. They allow your breath to escape and spread to others. \n "
 		    v.add_subview(title)
 		    v.add_subview(tv)
 		    v.present(hide_title_bar=True)
